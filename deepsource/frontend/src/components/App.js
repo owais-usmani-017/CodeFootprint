@@ -48,7 +48,7 @@ class App extends React.Component{
 }
 export default App;*/
 
-import Home from "./components/Home";
+/*import Home from "./components/Home";
 import About from "./components/About";
 import Contact from "./components/Contact";
 
@@ -58,6 +58,39 @@ function App() {
       <Home />
       <About />
       <Contact />
+    </div>
+  );
+}
+
+export default App;*/
+
+import { useState } from "react";
+
+function App() {
+  const [show, setShow] = useState(false);
+  const [count, setCount] = useState(0);
+
+  function handleToggle() {
+    if (show) {
+      setCount(0);
+    }
+    setShow(!show);
+  }
+
+  return (
+    <div>
+      <button onClick={handleToggle}>
+        {show ? "Hide" : "Show"}
+      </button>
+
+      {show && (
+        <div>
+          <h2>Count: {count}</h2>
+          <button onClick={() => setCount(prev => prev + 1)}>
+            Increment
+          </button>
+        </div>
+      )}
     </div>
   );
 }
