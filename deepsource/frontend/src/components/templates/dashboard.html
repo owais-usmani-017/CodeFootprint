@@ -1,0 +1,614 @@
+<!doctype html>
+
+<html class="light" lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta content="width=device-width, initial-scale=1.0" name="viewport" />
+    <title>CodeFootprint | Results Dashboard</title>
+    <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&amp;family=Manrope:wght@300;400;500;600;700;800&amp;family=JetBrains+Mono:wght@400;500&amp;display=swap"
+      rel="stylesheet"
+    />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap"
+      rel="stylesheet"
+    />
+    <script id="tailwind-config">
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            colors: {
+              "primary-fixed-dim": "#adc6ff",
+              "tertiary-container": "#b75b00",
+              "on-background": "#191c1d",
+              "surface-dim": "#d9dadb",
+              "on-secondary-fixed-variant": "#304671",
+              "secondary-fixed": "#d8e2ff",
+              "surface-container-highest": "#e1e3e4",
+              secondary: "#495e8a",
+              "secondary-fixed-dim": "#b1c6f9",
+              "surface-container-low": "#f3f4f5",
+              "inverse-primary": "#adc6ff",
+              "primary-container": "#2170e4",
+              "outline-variant": "#c2c6d6",
+              "tertiary-fixed": "#ffdcc6",
+              "secondary-container": "#b6ccff",
+              "surface-bright": "#f8f9fa",
+              "on-tertiary-container": "#fffbff",
+              "surface-container-lowest": "#ffffff",
+              background: "#ffffff",
+              "tertiary-fixed-dim": "#ffb786",
+              "on-surface-variant": "#424754",
+              "on-primary": "#ffffff",
+              outline: "#727785",
+              primary: "#0058be",
+              "inverse-on-surface": "#f0f1f2",
+              "surface-variant": "#e1e3e4",
+              "on-tertiary": "#ffffff",
+              "on-tertiary-fixed-variant": "#723600",
+              tertiary: "#924700",
+              "on-error-container": "#93000a",
+              "on-tertiary-fixed": "#311400",
+              "surface-tint": "#005ac2",
+              error: "#ba1a1a",
+              "on-primary-fixed-variant": "#004395",
+              "inverse-surface": "#2e3132",
+              "on-error": "#ffffff",
+              "primary-fixed": "#d8e2ff",
+              "on-surface": "#191c1d",
+              "surface-container": "#edeeef",
+              "on-secondary-container": "#405682",
+              "surface-container-high": "#e7e8e9",
+              "on-secondary-fixed": "#001a42",
+              "on-secondary": "#ffffff",
+              "on-primary-container": "#fefcff",
+              surface: "#ffffff",
+              "error-container": "#ffdad6",
+              "on-primary-fixed": "#001a42",
+            },
+            fontFamily: {
+              headline: ["Manrope", "Inter", "sans-serif"],
+              body: ["Inter", "sans-serif"],
+              mono: ["JetBrains Mono", "monospace"],
+              label: ["Inter", "sans-serif"],
+            },
+            borderRadius: {
+              DEFAULT: "0.125rem",
+              lg: "0.25rem",
+              xl: "0.5rem",
+              full: "0.75rem",
+            },
+          },
+        },
+      };
+    </script>
+    <style>
+      body {
+        font-family: "Inter", sans-serif;
+      }
+      .material-symbols-outlined {
+        font-variation-settings:
+          "FILL" 0,
+          "wght" 400,
+          "GRAD" 0,
+          "opsz" 24;
+      }
+      .tech-border {
+        border: 1px solid rgba(226, 232, 240, 0.5);
+      }
+      .tonal-shift {
+        background-color: #f8fafc;
+      }
+    </style>
+  </head>
+  <body
+    class="bg-background text-on-background antialiased selection:bg-primary-container selection:text-on-primary-container"
+  >
+    <!-- TopAppBar - Refactored using COMPONENTS_8 architectural style -->
+    <header
+      class="fixed top-0 w-full z-50 bg-white/80 dark:bg-slate-950/80 backdrop-blur-xl transition-all border-b border-slate-100/50"
+    >
+      <div
+        class="flex justify-between items-center px-6 md:px-12 py-5 w-full max-w-7xl mx-auto"
+      >
+        <div class="flex items-center gap-4">
+          <span
+            class="material-symbols-outlined text-blue-600 dark:text-blue-400 text-xl"
+            >grid_view</span
+          >
+          <span
+            class="text-lg font-semibold tracking-[0.2em] text-slate-900 dark:text-slate-50 uppercase"
+            >Architect</span
+          >
+        </div>
+        <nav class="hidden md:flex items-center gap-10">
+          <a
+            class="text-blue-600 dark:text-blue-400 font-medium text-xs tracking-widest uppercase font-manrope"
+            href="/"
+            target="_top"
+            >Analyze</a
+          >
+          <a
+            class="text-slate-500 dark:text-slate-400 hover:text-blue-500 transition-colors duration-300 text-xs tracking-widest uppercase font-manrope"
+            href="/dashboard"
+            target="_top"
+            >Dashboard</a
+          >
+          <a
+            class="text-slate-500 dark:text-slate-400 hover:text-blue-500 transition-colors duration-300 text-xs tracking-widest uppercase font-manrope"
+            href="/heatmap"
+            target="_top"
+            >Heatmap</a
+          >
+          <a
+            class="text-slate-500 dark:text-slate-400 hover:text-blue-500 transition-colors duration-300 text-xs tracking-widest uppercase font-manrope"
+            href="/loading"
+            target="_top"
+            >Settings</a
+          >
+        </nav>
+        <div class="flex items-center gap-4">
+          <span
+            class="material-symbols-outlined text-slate-400 hover:text-slate-600 cursor-pointer"
+            >settings</span
+          >
+          <div
+            class="h-8 w-8 rounded-full overflow-hidden border border-slate-200"
+          >
+            <img
+              alt="User"
+              class="h-full w-full object-cover"
+              src="https://lh3.googleusercontent.com/aida-public/AB6AXuB34LMJOP39h3lqUm_UAIfEer9UNJkD34IM_j0XU7wMkBu8a1dzVsGycl_JWkhli7m4xCquI9NDySBNbckEBLsTe3rN2P_kirvUD-wCDn5jQgKAbfGgF8-NVN1cNv_8B4VSKj5wCjAaR22lvoQ2_0-fx8mgcUP9qVwYGoQq7Umwcjyq3USNTh6zlip-mrRsb78BD0YZWMcMWxNP2w8HMwQyJimNNW6yJRzO6tuu60LyWqFfIFjCXcTymFIi2dSDpfGzbuxsj1LprlM"
+            />
+          </div>
+        </div>
+      </div>
+    </header>
+    <main class="pt-32 pb-40 px-6 max-w-7xl mx-auto">
+      <!-- Header Section -->
+      <section class="mb-20">
+        <div
+          class="flex flex-col md:flex-row md:items-end justify-between gap-8"
+        >
+          <div>
+            <div class="flex items-center gap-3 mb-4">
+              <span
+                class="text-[10px] font-bold uppercase tracking-[0.25em] text-slate-400"
+                >Project Engine</span
+              >
+              <div class="h-px w-8 bg-slate-200"></div>
+              <span class="text-primary font-mono text-xs">master</span>
+            </div>
+            <h1
+              class="text-3xl md:text-5xl font-light tracking-tight text-slate-900 font-headline mb-4"
+            >
+              codefootprint-ai/core-engine
+            </h1>
+            <p class="text-slate-500 text-sm font-light tracking-wide">
+              Analysis cycle completed for
+              <span class="font-medium text-slate-900">alex_dev</span> • 14
+              minutes latency
+            </p>
+          </div>
+          <div class="flex gap-4">
+            <button
+              class="bg-slate-900 text-white px-8 py-3 rounded-none text-[11px] font-semibold uppercase tracking-[0.2em] hover:bg-blue-600 transition-all active:scale-95 duration-200"
+            >
+              Run Analysis
+            </button>
+          </div>
+        </div>
+        <!-- Summary Stats - Redesigned with tonal shift and thin borders -->
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-12 mt-16">
+          <div
+            class="py-6 border-b border-slate-100 md:border-b-0 md:border-r md:pr-12"
+          >
+            <div class="flex items-center justify-between mb-6">
+              <span
+                class="text-[10px] font-bold uppercase tracking-widest text-slate-400"
+                >Total Commits</span
+              >
+            </div>
+            <div
+              class="text-4xl font-light tracking-tight text-slate-900 font-headline"
+            >
+              1,284
+            </div>
+            <div
+              class="mt-4 text-[11px] font-mono text-blue-600 flex items-center gap-2"
+            >
+              <span class="material-symbols-outlined text-xs">trending_up</span>
+              +12.40% MONTH_OVER_MONTH
+            </div>
+          </div>
+          <div
+            class="py-6 border-b border-slate-100 md:border-b-0 md:border-r md:px-12"
+          >
+            <div class="flex items-center justify-between mb-6">
+              <span
+                class="text-[10px] font-bold uppercase tracking-widest text-slate-400"
+                >Delta Files</span
+              >
+            </div>
+            <div
+              class="text-4xl font-light tracking-tight text-slate-900 font-headline"
+            >
+              42
+            </div>
+            <div
+              class="mt-4 text-[11px] font-mono text-slate-500 flex items-center gap-2"
+            >
+              4 ACTIVE MODULES
+            </div>
+          </div>
+          <div class="py-6 md:pl-12">
+            <div class="flex items-center justify-between mb-6">
+              <span
+                class="text-[10px] font-bold uppercase tracking-widest text-slate-400"
+                >Health Index</span
+              >
+            </div>
+            <div class="flex items-baseline gap-2">
+              <div
+                class="text-4xl font-light tracking-tight text-slate-900 font-headline"
+              >
+                94.2
+              </div>
+              <span class="text-xs font-mono text-slate-400">/100.0</span>
+            </div>
+            <div
+              class="mt-6 w-full bg-slate-50 h-1 rounded-full overflow-hidden"
+            >
+              <div class="bg-blue-600 h-full w-[94.2%]"></div>
+            </div>
+          </div>
+        </div>
+      </section>
+      <!-- Main Content Area -->
+      <div class="grid grid-cols-1 lg:grid-cols-12 gap-20">
+        <!-- Commit Analysis List -->
+        <div class="lg:col-span-8 space-y-12">
+          <div
+            class="flex items-center justify-between pb-4 border-b border-slate-100"
+          >
+            <h2
+              class="text-sm font-bold tracking-[0.15em] uppercase text-slate-900"
+            >
+              Historical Log
+            </h2>
+            <div class="flex gap-6">
+              <button
+                class="text-[10px] font-bold uppercase tracking-widest text-blue-600 hover:text-blue-800 transition-colors"
+              >
+                Global
+              </button>
+              <button
+                class="text-[10px] font-bold uppercase tracking-widest text-slate-400 hover:text-slate-600 transition-colors"
+              >
+                Filter
+              </button>
+            </div>
+          </div>
+          <!-- Commit Card 1 - Cleaned up and focused on AI Summaries -->
+          <div class="group border-b border-slate-50 pb-12 transition-all">
+            <div class="flex items-start justify-between mb-6">
+              <div>
+                <div class="flex items-center gap-3 mb-2">
+                  <span
+                    class="text-[10px] font-mono text-slate-400 tracking-tight"
+                    >SHA 8f2a41d</span
+                  >
+                  <span class="w-1 h-1 rounded-full bg-slate-200"></span>
+                  <span
+                    class="text-[10px] font-mono text-slate-400 tracking-tight"
+                    >OCT 24, 2023</span
+                  >
+                </div>
+                <h3 class="text-lg font-medium text-slate-900 tracking-tight">
+                  feat: implement concurrent analysis engine
+                </h3>
+              </div>
+              <span
+                class="px-2 py-0.5 text-[9px] font-bold uppercase tracking-[0.2em] border border-blue-100 text-blue-600"
+                >Feature</span
+              >
+            </div>
+            <div class="mb-8 pl-4 border-l border-blue-500/20">
+              <p class="text-[13px] text-slate-600 leading-relaxed font-light">
+                <span
+                  class="text-blue-600 font-medium uppercase text-[9px] tracking-widest mr-2"
+                  >Analysis:</span
+                >
+                Optimized the core execution pipeline by introducing a worker
+                pool, resulting in a 40% reduction in processing time for large
+                codebases.
+              </p>
+            </div>
+            <div
+              class="flex items-center justify-between text-[11px] font-mono"
+            >
+              <div class="flex items-center gap-8">
+                <div class="flex items-center gap-1.5 text-slate-400">
+                  <span>12f</span>
+                </div>
+                <div class="flex items-center gap-1.5 text-emerald-600">
+                  <span>+412</span>
+                </div>
+                <div class="flex items-center gap-1.5 text-rose-500">
+                  <span>-84</span>
+                </div>
+              </div>
+              <button
+                class="text-[10px] font-bold tracking-widest uppercase text-slate-400 group-hover:text-blue-600 transition-colors"
+              >
+                Inspect Diff
+              </button>
+            </div>
+          </div>
+          <!-- Commit Card 2 -->
+          <div class="group border-b border-slate-50 pb-12 transition-all">
+            <div class="flex items-start justify-between mb-6">
+              <div>
+                <div class="flex items-center gap-3 mb-2">
+                  <span
+                    class="text-[10px] font-mono text-slate-400 tracking-tight"
+                    >SHA 3c91e02</span
+                  >
+                  <span class="w-1 h-1 rounded-full bg-slate-200"></span>
+                  <span
+                    class="text-[10px] font-mono text-slate-400 tracking-tight"
+                    >OCT 22, 2023</span
+                  >
+                </div>
+                <h3 class="text-lg font-medium text-slate-900 tracking-tight">
+                  fix: resolve race condition in file watcher
+                </h3>
+              </div>
+              <span
+                class="px-2 py-0.5 text-[9px] font-bold uppercase tracking-[0.2em] border border-orange-100 text-orange-600"
+                >Fix</span
+              >
+            </div>
+            <div class="mb-8 pl-4 border-l border-orange-500/20">
+              <p class="text-[13px] text-slate-600 leading-relaxed font-light">
+                <span
+                  class="text-orange-600 font-medium uppercase text-[9px] tracking-widest mr-2"
+                  >Analysis:</span
+                >
+                Identified a critical memory leak in the debounce logic of the
+                file monitoring service. Added mutex locking to ensure thread
+                safety.
+              </p>
+            </div>
+            <div
+              class="flex items-center justify-between text-[11px] font-mono"
+            >
+              <div class="flex items-center gap-8">
+                <div class="flex items-center gap-1.5 text-slate-400">
+                  <span>2f</span>
+                </div>
+                <div class="flex items-center gap-1.5 text-emerald-600">
+                  <span>+18</span>
+                </div>
+                <div class="flex items-center gap-1.5 text-rose-500">
+                  <span>-12</span>
+                </div>
+              </div>
+              <button
+                class="text-[10px] font-bold tracking-widest uppercase text-slate-400 group-hover:text-blue-600 transition-colors"
+              >
+                Inspect Diff
+              </button>
+            </div>
+          </div>
+          <!-- Commit Card 3 -->
+          <div class="group border-b border-slate-50 pb-12 transition-all">
+            <div class="flex items-start justify-between mb-6">
+              <div>
+                <div class="flex items-center gap-3 mb-2">
+                  <span
+                    class="text-[10px] font-mono text-slate-400 tracking-tight"
+                    >SHA 5d1f93a</span
+                  >
+                  <span class="w-1 h-1 rounded-full bg-slate-200"></span>
+                  <span
+                    class="text-[10px] font-mono text-slate-400 tracking-tight"
+                    >OCT 21, 2023</span
+                  >
+                </div>
+                <h3 class="text-lg font-medium text-slate-900 tracking-tight">
+                  refactor: cleanup utility functions
+                </h3>
+              </div>
+              <span
+                class="px-2 py-0.5 text-[9px] font-bold uppercase tracking-[0.2em] border border-slate-200 text-slate-500"
+                >Refactor</span
+              >
+            </div>
+            <div class="mb-8 pl-4 border-l border-slate-300">
+              <p class="text-[13px] text-slate-600 leading-relaxed font-light">
+                <span
+                  class="text-slate-900 font-medium uppercase text-[9px] tracking-widest mr-2"
+                  >Analysis:</span
+                >
+                Improved type safety across the project by moving loose object
+                definitions to centralized TypeScript interfaces.
+              </p>
+            </div>
+            <div
+              class="flex items-center justify-between text-[11px] font-mono"
+            >
+              <div class="flex items-center gap-8">
+                <div class="flex items-center gap-1.5 text-slate-400">
+                  <span>24f</span>
+                </div>
+                <div class="flex items-center gap-1.5 text-emerald-600">
+                  <span>+124</span>
+                </div>
+                <div class="flex items-center gap-1.5 text-rose-500">
+                  <span>-210</span>
+                </div>
+              </div>
+              <button
+                class="text-[10px] font-bold tracking-widest uppercase text-slate-400 group-hover:text-blue-600 transition-colors"
+              >
+                Inspect Diff
+              </button>
+            </div>
+          </div>
+        </div>
+        <!-- Sidebar -->
+        <aside class="lg:col-span-4 space-y-16">
+          <!-- Contribution Breakdown -->
+          <div class="tonal-shift p-8 tech-border rounded-none">
+            <h2
+              class="text-xs font-bold tracking-[0.2em] uppercase text-slate-900 mb-10"
+            >
+              System Load
+            </h2>
+            <div class="space-y-10">
+              <div>
+                <div class="flex justify-between items-center mb-3">
+                  <span
+                    class="text-[10px] font-bold uppercase tracking-wider text-slate-400"
+                    >Backend Logic</span
+                  >
+                  <span class="text-[11px] font-mono text-slate-900">65%</span>
+                </div>
+                <div class="w-full bg-slate-200 h-[1px]">
+                  <div class="bg-slate-900 h-full w-[65%]"></div>
+                </div>
+                <p class="text-[9px] font-mono text-slate-400 mt-2 uppercase">
+                  Node.js / Rust runtime
+                </p>
+              </div>
+              <div>
+                <div class="flex justify-between items-center mb-3">
+                  <span
+                    class="text-[10px] font-bold uppercase tracking-wider text-slate-400"
+                    >UI &amp; Frontend</span
+                  >
+                  <span class="text-[11px] font-mono text-slate-900">22%</span>
+                </div>
+                <div class="w-full bg-slate-200 h-[1px]">
+                  <div class="bg-slate-900 h-full w-[22%]"></div>
+                </div>
+                <p class="text-[9px] font-mono text-slate-400 mt-2 uppercase">
+                  Client visualization
+                </p>
+              </div>
+              <div>
+                <div class="flex justify-between items-center mb-3">
+                  <span
+                    class="text-[10px] font-bold uppercase tracking-wider text-slate-400"
+                    >Maintenance</span
+                  >
+                  <span class="text-[11px] font-mono text-slate-900">13%</span>
+                </div>
+                <div class="w-full bg-slate-200 h-[1px]">
+                  <div class="bg-slate-900 h-full w-[13%]"></div>
+                </div>
+                <p class="text-[9px] font-mono text-slate-400 mt-2 uppercase">
+                  Docs &amp; tech debt
+                </p>
+              </div>
+            </div>
+            <div class="mt-12 pt-8 border-t border-slate-200/50">
+              <div class="bg-white p-6 border border-slate-100">
+                <h4
+                  class="text-[9px] font-bold text-blue-600 uppercase tracking-[0.2em] mb-3"
+                >
+                  Recommendation
+                </h4>
+                <p
+                  class="text-[11px] text-slate-500 leading-relaxed font-light"
+                >
+                  Increase unit coverage for the worker pool implementation
+                  given the current focus on concurrent logic.
+                </p>
+              </div>
+            </div>
+          </div>
+          <!-- Analysis Health Chart -->
+          <div class="p-8">
+            <h2
+              class="text-xs font-bold tracking-[0.2em] uppercase text-slate-900 mb-10"
+            >
+              Efficiency Metrics
+            </h2>
+            <div class="aspect-[4/3] flex items-end gap-2 px-2">
+              <div class="w-full bg-slate-100 h-[25%]"></div>
+              <div class="w-full bg-slate-100 h-[40%]"></div>
+              <div class="w-full bg-slate-100 h-[20%]"></div>
+              <div class="w-full bg-slate-200 h-[55%]"></div>
+              <div class="w-full bg-slate-300 h-[75%]"></div>
+              <div class="w-full bg-blue-600 h-[90%]"></div>
+              <div class="w-full bg-slate-400 h-[35%]"></div>
+            </div>
+            <div class="mt-8 text-center">
+              <span
+                class="text-[9px] font-mono text-slate-400 uppercase tracking-widest"
+                >Efficiency over 7d period</span
+              >
+            </div>
+          </div>
+        </aside>
+      </div>
+    </main>
+    <!-- BottomNavBar - Refactored using COMPONENTS_8 architectural style -->
+    <footer
+      class="md:hidden fixed bottom-0 left-0 w-full z-50 bg-slate-50/90 dark:bg-slate-900/90 backdrop-blur-lg border-t border-slate-200/10 pb-8 h-24"
+    >
+      <div
+        class="flex justify-around items-center w-full max-w-lg mx-auto h-20 px-4"
+      >
+        <a
+          class="flex flex-col items-center justify-center text-blue-600 dark:text-blue-400 transition-all duration-300 active:scale-90"
+          href="/"
+          target="_top"
+        >
+          <span class="material-symbols-outlined text-xl">code</span>
+          <span
+            class="text-[9px] tracking-widest uppercase font-semibold mt-1 font-inter"
+            >Code</span
+          >
+        </a>
+        <a
+          class="flex flex-col items-center justify-center text-slate-400 dark:text-slate-600 opacity-60 hover:opacity-100 transition-opacity duration-200 active:scale-90"
+          href="/dashboard"
+          target="_top"
+        >
+          <span class="material-symbols-outlined text-xl">terminal</span>
+          <span
+            class="text-[9px] tracking-widest uppercase font-semibold mt-1 font-inter"
+            >Build</span
+          >
+        </a>
+        <a
+          class="flex flex-col items-center justify-center text-slate-400 dark:text-slate-600 opacity-60 hover:opacity-100 transition-opacity duration-200 active:scale-90"
+          href="/heatmap"
+          target="_top"
+        >
+          <span class="material-symbols-outlined text-xl">bug_report</span>
+          <span
+            class="text-[9px] tracking-widest uppercase font-semibold mt-1 font-inter"
+            >Debug</span
+          >
+        </a>
+        <a
+          class="flex flex-col items-center justify-center text-slate-400 dark:text-slate-600 opacity-60 hover:opacity-100 transition-opacity duration-200 active:scale-90"
+          href="/loading"
+          target="_top"
+        >
+          <span class="material-symbols-outlined text-xl">rocket_launch</span>
+          <span
+            class="text-[9px] tracking-widest uppercase font-semibold mt-1 font-inter"
+            >Deploy</span
+          >
+        </a>
+      </div>
+    </footer>
+  </body>
+</html>

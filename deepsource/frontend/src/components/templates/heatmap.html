@@ -1,0 +1,666 @@
+<!doctype html>
+
+<html class="light" lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta content="width=device-width, initial-scale=1.0" name="viewport" />
+    <title>CodeFootprint | Contribution Pulse</title>
+    <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&amp;family=Manrope:wght@300;400;500;600;700;800&amp;display=swap"
+      rel="stylesheet"
+    />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap"
+      rel="stylesheet"
+    />
+    <script id="tailwind-config">
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            colors: {
+              primary: "#0058be",
+              background: "#ffffff",
+              surface: "#ffffff",
+              "on-surface": "#0f172a",
+              "on-surface-variant": "#64748b",
+              "outline-variant": "#f1f5f9",
+              "primary-container": "#eff6ff",
+              "secondary-container": "#f8fafc",
+            },
+            fontFamily: {
+              headline: ["Manrope", "Inter", "sans-serif"],
+              body: ["Inter", "sans-serif"],
+              manrope: ["Manrope", "sans-serif"],
+            },
+            borderRadius: {
+              DEFAULT: "0.25rem",
+              lg: "0.5rem",
+              xl: "0.75rem",
+              full: "9999px",
+            },
+          },
+        },
+      };
+    </script>
+    <style>
+      .material-symbols-outlined {
+        font-variation-settings:
+          "FILL" 0,
+          "wght" 300,
+          "GRAD" 0,
+          "opsz" 20;
+        vertical-align: middle;
+      }
+      body {
+        background-color: #ffffff;
+        color: #0f172a;
+        font-family: "Inter", sans-serif;
+        -webkit-font-smoothing: antialiased;
+      }
+      .heatmap-cell {
+        aspect-ratio: 1/1;
+        border-radius: 1px;
+      }
+      /* Lumen Syntax Color Steps - Subtle */
+      .step-0 {
+        background-color: #f8fafc;
+      }
+      .step-1 {
+        background-color: #e2e8f0;
+      }
+      .step-2 {
+        background-color: #cbd5e1;
+      }
+      .step-3 {
+        background-color: #94a3b8;
+      }
+      .step-4 {
+        background-color: #64748b;
+      }
+
+      .hide-scrollbar::-webkit-scrollbar {
+        display: none;
+      }
+      .hide-scrollbar {
+        -ms-overflow-style: none;
+        scrollbar-width: none;
+      }
+    </style>
+  </head>
+  <body
+    class="bg-background text-on-surface font-body selection:bg-blue-100 selection:text-blue-900"
+  >
+    <!-- TopAppBar from COMPONENTS_8 -->
+    <header
+      class="fixed top-0 w-full z-50 bg-white/80 dark:bg-slate-950/80 backdrop-blur-xl transition-colors duration-200"
+    >
+      <div
+        class="flex justify-between items-center px-6 md:px-12 py-5 w-full max-w-7xl mx-auto"
+      >
+        <div class="flex items-center gap-6">
+          <div class="flex items-center gap-3">
+            <span
+              class="material-symbols-outlined text-blue-600 dark:text-blue-400 text-2xl"
+              data-icon="grid_view"
+              >grid_view</span
+            >
+            <h1
+              class="text-lg font-semibold tracking-[0.2em] text-slate-900 dark:text-slate-50 font-manrope"
+            >
+              CodeFootprint
+            </h1>
+          </div>
+          <nav class="hidden md:flex items-center space-x-8">
+            <a
+              class="text-blue-600 dark:text-blue-400 font-medium font-manrope tracking-tight text-sm"
+              href="/"
+              target="_top"
+              >ANALYZE</a
+            >
+            <a
+              class="text-slate-500 dark:text-slate-400 hover:text-blue-500 transition-colors duration-300 font-manrope tracking-tight text-sm"
+              href="/dashboard"
+              target="_top"
+              >BUILD</a
+            >
+            <a
+              class="text-slate-500 dark:text-slate-400 hover:text-blue-500 transition-colors duration-300 font-manrope tracking-tight text-sm"
+              href="/heatmap"
+              target="_top"
+              >DEBUG</a
+            >
+            <a
+              class="text-slate-500 dark:text-slate-400 hover:text-blue-500 transition-colors duration-300 font-manrope tracking-tight text-sm"
+              href="/loading"
+              target="_top"
+              >DEPLOY</a
+            >
+          </nav>
+        </div>
+        <div class="flex items-center gap-4">
+          <button
+            class="p-2 text-slate-400 hover:text-blue-600 transition-all scale-95 active:opacity-70"
+          >
+            <span class="material-symbols-outlined" data-icon="settings"
+              >settings</span
+            >
+          </button>
+          <div
+            class="w-8 h-8 rounded-full bg-slate-100 overflow-hidden ring-1 ring-slate-200"
+          >
+            <img
+              alt="User"
+              class="w-full h-full object-cover"
+              src="https://lh3.googleusercontent.com/aida-public/AB6AXuDUlJ47uD8Tb_VBodj2n662cheopIUbJZes-4VdanpXT6saXgVQ46jFFOPzGOcBy3480Zoezl3s38sBSRaYah1pAkmC9LpMy7eY6YMYNZzI84QcqoTaqQ12EnSKeclrKkBg-y0qY8nZ-dr0UGeCVGa2uyk5ss4TMkgymOmmkhNIvNo_upYPa7VwV_Dl16lHJBp8S9WdHL1v6W-v2QPcAB_l-xY4EuZ90lKy1OouGug-R2aZkyy8H5gtu_H339zCa8TkzQcbYTyFCm8"
+            />
+          </div>
+        </div>
+      </div>
+    </header>
+    <main class="pt-28 pb-32 px-6 max-w-7xl mx-auto">
+      <!-- Header -->
+      <div class="mb-16">
+        <h2
+          class="text-4xl font-extrabold tracking-tight text-slate-900 font-manrope mb-3"
+        >
+          Contribution Intel
+        </h2>
+        <p class="text-slate-500 max-w-2xl font-light leading-relaxed text-lg">
+          A minimal snapshot of architectural velocity and repository intensity.
+        </p>
+      </div>
+      <div class="grid grid-cols-1 lg:grid-cols-12 gap-16">
+        <!-- Simplified Heatmap Section -->
+        <section class="lg:col-span-8">
+          <div class="mb-12">
+            <div
+              class="flex items-end justify-between mb-8 border-b border-slate-100 pb-4"
+            >
+              <div>
+                <h3
+                  class="text-xs font-bold uppercase tracking-widest text-slate-400 mb-1"
+                >
+                  Active Pulse
+                </h3>
+                <p class="text-sm font-medium text-slate-900">
+                  Repository Frequency Analysis
+                </p>
+              </div>
+              <div
+                class="flex items-center gap-3 text-[10px] font-bold text-slate-400 uppercase tracking-tighter"
+              >
+                <span>Min</span>
+                <div class="flex gap-1">
+                  <div class="w-2.5 h-2.5 step-0"></div>
+                  <div class="w-2.5 h-2.5 step-1"></div>
+                  <div class="w-2.5 h-2.5 step-2"></div>
+                  <div class="w-2.5 h-2.5 step-3"></div>
+                  <div class="w-2.5 h-2.5 step-4"></div>
+                </div>
+                <span>Max</span>
+              </div>
+            </div>
+            <!-- Borderless Heatmap Grid -->
+            <div class="overflow-x-auto hide-scrollbar">
+              <div class="flex gap-1 min-w-[700px]">
+                <div class="grid grid-rows-7 grid-flow-col gap-[2px] w-full">
+                  <!-- Mock Year Data - Subtler Steps -->
+                  <div class="heatmap-cell step-0"></div>
+                  <div class="heatmap-cell step-1"></div>
+                  <div class="heatmap-cell step-0"></div>
+                  <div class="heatmap-cell step-0"></div>
+                  <div class="heatmap-cell step-3"></div>
+                  <div class="heatmap-cell step-1"></div>
+                  <div class="heatmap-cell step-0"></div>
+                  <div class="heatmap-cell step-2"></div>
+                  <div class="heatmap-cell step-0"></div>
+                  <div class="heatmap-cell step-0"></div>
+                  <div class="heatmap-cell step-4"></div>
+                  <div class="heatmap-cell step-1"></div>
+                  <div class="heatmap-cell step-0"></div>
+                  <div class="heatmap-cell step-0"></div>
+                  <div class="heatmap-cell step-0"></div>
+                  <div class="heatmap-cell step-2"></div>
+                  <div class="heatmap-cell step-4"></div>
+                  <div class="heatmap-cell step-1"></div>
+                  <div class="heatmap-cell step-0"></div>
+                  <div class="heatmap-cell step-0"></div>
+                  <div class="heatmap-cell step-1"></div>
+                  <div class="heatmap-cell step-1"></div>
+                  <div class="heatmap-cell step-1"></div>
+                  <div class="heatmap-cell step-3"></div>
+                  <div class="heatmap-cell step-2"></div>
+                  <div class="heatmap-cell step-0"></div>
+                  <div class="heatmap-cell step-0"></div>
+                  <div class="heatmap-cell step-0"></div>
+                  <div class="heatmap-cell step-0"></div>
+                  <div class="heatmap-cell step-0"></div>
+                  <div class="heatmap-cell step-1"></div>
+                  <div class="heatmap-cell step-1"></div>
+                  <div class="heatmap-cell step-0"></div>
+                  <div class="heatmap-cell step-1"></div>
+                  <div class="heatmap-cell step-4"></div>
+                  <div class="heatmap-cell step-1"></div>
+                  <div class="heatmap-cell step-0"></div>
+                  <div class="heatmap-cell step-0"></div>
+                  <div class="heatmap-cell step-1"></div>
+                  <div class="heatmap-cell step-3"></div>
+                  <div class="heatmap-cell step-0"></div>
+                  <div class="heatmap-cell step-1"></div>
+                  <div class="heatmap-cell step-2"></div>
+                  <div class="heatmap-cell step-4"></div>
+                  <div class="heatmap-cell step-1"></div>
+                  <div class="heatmap-cell step-0"></div>
+                  <div class="heatmap-cell step-0"></div>
+                  <div class="heatmap-cell step-1"></div>
+                  <div class="heatmap-cell step-1"></div>
+                  <div class="heatmap-cell step-0"></div>
+                  <div class="heatmap-cell step-0"></div>
+                  <div class="heatmap-cell step-2"></div>
+                  <div class="heatmap-cell step-1"></div>
+                  <div class="heatmap-cell step-2"></div>
+                  <div class="heatmap-cell step-0"></div>
+                  <div class="heatmap-cell step-0"></div>
+                  <div class="heatmap-cell step-0"></div>
+                  <div class="heatmap-cell step-1"></div>
+                  <div class="heatmap-cell step-3"></div>
+                  <div class="heatmap-cell step-0"></div>
+                  <div class="heatmap-cell step-0"></div>
+                  <div class="heatmap-cell step-0"></div>
+                  <div class="heatmap-cell step-0"></div>
+                  <div class="heatmap-cell step-1"></div>
+                  <div class="heatmap-cell step-3"></div>
+                  <div class="heatmap-cell step-1"></div>
+                  <div class="heatmap-cell step-0"></div>
+                  <div class="heatmap-cell step-0"></div>
+                  <div class="heatmap-cell step-0"></div>
+                  <div class="heatmap-cell step-2"></div>
+                  <div class="heatmap-cell step-0"></div>
+                  <div class="heatmap-cell step-0"></div>
+                  <div class="heatmap-cell step-1"></div>
+                  <div class="heatmap-cell step-2"></div>
+                  <div class="heatmap-cell step-4"></div>
+                  <div class="heatmap-cell step-1"></div>
+                  <div class="heatmap-cell step-0"></div>
+                  <div class="heatmap-cell step-1"></div>
+                  <div class="heatmap-cell step-1"></div>
+                  <div class="heatmap-cell step-0"></div>
+                  <div class="heatmap-cell step-0"></div>
+                  <div class="heatmap-cell step-1"></div>
+                  <div class="heatmap-cell step-1"></div>
+                  <div class="heatmap-cell step-3"></div>
+                  <div class="heatmap-cell step-0"></div>
+                  <div class="heatmap-cell step-1"></div>
+                  <div class="heatmap-cell step-4"></div>
+                  <div class="heatmap-cell step-2"></div>
+                  <div class="heatmap-cell step-0"></div>
+                  <div class="heatmap-cell step-0"></div>
+                  <div class="heatmap-cell step-0"></div>
+                  <div class="heatmap-cell step-2"></div>
+                  <div class="heatmap-cell step-0"></div>
+                  <div class="heatmap-cell step-0"></div>
+                  <div class="heatmap-cell step-1"></div>
+                  <div class="heatmap-cell step-4"></div>
+                  <div class="heatmap-cell step-1"></div>
+                  <div class="heatmap-cell step-0"></div>
+                  <div class="heatmap-cell step-1"></div>
+                  <div class="heatmap-cell step-1"></div>
+                  <div class="heatmap-cell step-0"></div>
+                  <div class="heatmap-cell step-2"></div>
+                  <div class="heatmap-cell step-0"></div>
+                  <div class="heatmap-cell step-0"></div>
+                  <div class="heatmap-cell step-4"></div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div
+            class="grid grid-cols-2 gap-12 mt-16 pt-8 border-t border-slate-100"
+          >
+            <div>
+              <p
+                class="text-[10px] font-bold uppercase tracking-widest text-slate-400 mb-2"
+              >
+                Architectural Volume
+              </p>
+              <div class="flex items-baseline gap-3">
+                <span class="text-4xl font-bold tracking-tight font-manrope"
+                  >1,248</span
+                >
+                <span
+                  class="text-xs font-semibold text-emerald-600 bg-emerald-50 px-2 py-0.5 rounded"
+                  >+12%</span
+                >
+              </div>
+            </div>
+            <div>
+              <p
+                class="text-[10px] font-bold uppercase tracking-widest text-slate-400 mb-2"
+              >
+                Delta Throughput
+              </p>
+              <div class="flex items-baseline gap-3">
+                <span class="text-4xl font-bold tracking-tight font-manrope"
+                  >42,890</span
+                >
+                <span class="text-xs font-semibold text-slate-500">Lines</span>
+              </div>
+            </div>
+          </div>
+        </section>
+        <!-- List-based High Intensity View -->
+        <aside class="lg:col-span-4">
+          <div class="mb-10">
+            <div
+              class="flex items-center justify-between mb-8 border-b border-slate-100 pb-4"
+            >
+              <h3
+                class="text-xs font-bold uppercase tracking-widest text-slate-400"
+              >
+                Intensity List
+              </h3>
+              <button
+                class="text-[10px] font-bold uppercase tracking-widest text-blue-600 hover:text-blue-800 transition-colors"
+              >
+                Expand
+              </button>
+            </div>
+            <div class="space-y-8">
+              <!-- Clean List Item -->
+              <div class="group">
+                <div class="flex items-start justify-between mb-2">
+                  <div class="flex items-center gap-3">
+                    <span
+                      class="material-symbols-outlined text-slate-300 group-hover:text-blue-500 transition-colors"
+                      data-icon="description"
+                      >description</span
+                    >
+                    <span
+                      class="text-sm font-semibold text-slate-700 tracking-tight"
+                      >core/engine.py</span
+                    >
+                  </div>
+                  <span
+                    class="text-[9px] font-bold text-slate-400 uppercase tracking-widest"
+                    >85%</span
+                  >
+                </div>
+                <div class="w-full bg-slate-100 h-[2px] overflow-hidden">
+                  <div
+                    class="h-full bg-slate-900 w-[85%] transition-all duration-500 group-hover:bg-blue-600"
+                  ></div>
+                </div>
+                <p class="text-[10px] text-slate-400 mt-2 font-medium">
+                  242 Significant Contributions
+                </p>
+              </div>
+              <div class="group">
+                <div class="flex items-start justify-between mb-2">
+                  <div class="flex items-center gap-3">
+                    <span
+                      class="material-symbols-outlined text-slate-300 group-hover:text-blue-500 transition-colors"
+                      data-icon="javascript"
+                      >javascript</span
+                    >
+                    <span
+                      class="text-sm font-semibold text-slate-700 tracking-tight"
+                      >ui/Graph.tsx</span
+                    >
+                  </div>
+                  <span
+                    class="text-[9px] font-bold text-slate-400 uppercase tracking-widest"
+                    >72%</span
+                  >
+                </div>
+                <div class="w-full bg-slate-100 h-[2px] overflow-hidden">
+                  <div
+                    class="h-full bg-slate-400 w-[72%] transition-all duration-500 group-hover:bg-blue-500"
+                  ></div>
+                </div>
+                <p class="text-[10px] text-slate-400 mt-2 font-medium">
+                  189 Significant Contributions
+                </p>
+              </div>
+              <div class="group">
+                <div class="flex items-start justify-between mb-2">
+                  <div class="flex items-center gap-3">
+                    <span
+                      class="material-symbols-outlined text-slate-300 group-hover:text-blue-500 transition-colors"
+                      data-icon="database"
+                      >database</span
+                    >
+                    <span
+                      class="text-sm font-semibold text-slate-700 tracking-tight"
+                      >db/schema.sql</span
+                    >
+                  </div>
+                  <span
+                    class="text-[9px] font-bold text-slate-400 uppercase tracking-widest"
+                    >64%</span
+                  >
+                </div>
+                <div class="w-full bg-slate-100 h-[2px] overflow-hidden">
+                  <div
+                    class="h-full bg-slate-400 w-[64%] transition-all duration-500 group-hover:bg-blue-500"
+                  ></div>
+                </div>
+                <p class="text-[10px] text-slate-400 mt-2 font-medium">
+                  156 Significant Contributions
+                </p>
+              </div>
+            </div>
+          </div>
+          <div
+            class="p-6 border border-slate-100 rounded-lg group hover:border-blue-200 transition-colors"
+          >
+            <p
+              class="text-[9px] font-bold uppercase tracking-[0.2em] text-slate-400 mb-2"
+            >
+              Ownership Intel
+            </p>
+            <h4 class="text-sm font-bold leading-snug mb-4 text-slate-800">
+              You are the primary contributor for 12 core modules.
+            </h4>
+            <button
+              class="text-xs font-bold text-blue-600 hover:text-blue-800 flex items-center gap-2 group-hover:translate-x-1 transition-transform"
+            >
+              Claim Verified Ownership
+              <span
+                class="material-symbols-outlined text-sm"
+                data-icon="arrow_forward"
+                >arrow_forward</span
+              >
+            </button>
+          </div>
+        </aside>
+      </div>
+      <!-- Recent Activity Section -->
+      <section class="mt-24">
+        <div
+          class="flex items-center justify-between mb-8 border-b border-slate-100 pb-4"
+        >
+          <h3
+            class="text-xs font-bold uppercase tracking-widest text-slate-400"
+          >
+            Stream Activity
+          </h3>
+          <div class="relative group">
+            <span
+              class="material-symbols-outlined absolute left-0 top-1/2 -translate-y-1/2 text-slate-400 text-sm"
+              data-icon="search"
+              >search</span
+            >
+            <input
+              class="pl-6 pr-0 py-1 bg-transparent border-none text-xs focus:ring-0 placeholder:text-slate-300 w-32 focus:w-48 transition-all duration-300"
+              placeholder="Filter stream..."
+              type="text"
+            />
+          </div>
+        </div>
+        <div class="overflow-x-auto">
+          <table class="w-full text-left">
+            <tbody class="divide-y divide-slate-50">
+              <tr class="group hover:bg-slate-50/50 transition-colors">
+                <td class="py-5">
+                  <div class="flex items-center gap-4">
+                    <span
+                      class="w-8 h-8 rounded-full bg-slate-50 flex items-center justify-center text-slate-400 group-hover:text-blue-600 transition-colors"
+                    >
+                      <span
+                        class="material-symbols-outlined text-lg"
+                        data-icon="folder"
+                        >folder</span
+                      >
+                    </span>
+                    <div>
+                      <p
+                        class="text-sm font-semibold text-slate-800 tracking-tight"
+                      >
+                        src/api/auth_provider.go
+                      </p>
+                      <p class="text-[10px] text-slate-400">
+                        2 hours ago • Alex Dev
+                      </p>
+                    </div>
+                  </div>
+                </td>
+                <td class="py-5">
+                  <div class="flex gap-[2px]">
+                    <div class="w-1.5 h-3 step-4"></div>
+                    <div class="w-1.5 h-3 step-4"></div>
+                    <div class="w-1.5 h-3 step-4"></div>
+                    <div class="w-1.5 h-3 step-1"></div>
+                    <div class="w-1.5 h-3 step-1"></div>
+                  </div>
+                </td>
+                <td class="py-5 text-right">
+                  <button
+                    class="text-slate-300 hover:text-slate-900 transition-colors"
+                  >
+                    <span
+                      class="material-symbols-outlined text-lg"
+                      data-icon="more_horiz"
+                      >more_horiz</span
+                    >
+                  </button>
+                </td>
+              </tr>
+              <tr class="group hover:bg-slate-50/50 transition-colors">
+                <td class="py-5">
+                  <div class="flex items-center gap-4">
+                    <span
+                      class="w-8 h-8 rounded-full bg-slate-50 flex items-center justify-center text-slate-400 group-hover:text-blue-600 transition-colors"
+                    >
+                      <span
+                        class="material-symbols-outlined text-lg"
+                        data-icon="folder"
+                        >folder</span
+                      >
+                    </span>
+                    <div>
+                      <p
+                        class="text-sm font-semibold text-slate-800 tracking-tight"
+                      >
+                        src/components/common/Header.js
+                      </p>
+                      <p class="text-[10px] text-slate-400">
+                        Yesterday • Alex Dev
+                      </p>
+                    </div>
+                  </div>
+                </td>
+                <td class="py-5">
+                  <div class="flex gap-[2px]">
+                    <div class="w-1.5 h-3 step-2"></div>
+                    <div class="w-1.5 h-3 step-2"></div>
+                    <div class="w-1.5 h-3 step-1"></div>
+                    <div class="w-1.5 h-3 step-0"></div>
+                    <div class="w-1.5 h-3 step-0"></div>
+                  </div>
+                </td>
+                <td class="py-5 text-right">
+                  <button
+                    class="text-slate-300 hover:text-slate-900 transition-colors"
+                  >
+                    <span
+                      class="material-symbols-outlined text-lg"
+                      data-icon="more_horiz"
+                      >more_horiz</span
+                    >
+                  </button>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </section>
+    </main>
+    <!-- BottomNavBar from COMPONENTS_8 -->
+    <nav
+      class="md:hidden fixed bottom-0 left-0 w-full bg-slate-50/90 dark:bg-slate-900/90 backdrop-blur-lg border-t border-slate-200/10 dark:border-slate-800/10 z-50 pb-8"
+    >
+      <div
+        class="flex justify-around items-center w-full max-w-lg mx-auto h-20"
+      >
+        <a
+          class="flex flex-col items-center justify-center text-blue-600 dark:text-blue-400 opacity-100 tap-highlight-none active:scale-90 transition-opacity duration-200"
+          href="/"
+          target="_top"
+        >
+          <span class="material-symbols-outlined text-2xl" data-icon="code"
+            >code</span
+          >
+          <span
+            class="font-inter text-[9px] tracking-widest uppercase font-semibold mt-1"
+            >CODE</span
+          >
+        </a>
+        <a
+          class="flex flex-col items-center justify-center text-slate-400 dark:text-slate-600 opacity-60 hover:opacity-100 tap-highlight-none active:scale-90 transition-opacity duration-200"
+          href="/dashboard"
+          target="_top"
+        >
+          <span class="material-symbols-outlined text-2xl" data-icon="terminal"
+            >terminal</span
+          >
+          <span
+            class="font-inter text-[9px] tracking-widest uppercase font-semibold mt-1"
+            >BUILD</span
+          >
+        </a>
+        <a
+          class="flex flex-col items-center justify-center text-slate-400 dark:text-slate-600 opacity-60 hover:opacity-100 tap-highlight-none active:scale-90 transition-opacity duration-200"
+          href="/heatmap"
+          target="_top"
+        >
+          <span
+            class="material-symbols-outlined text-2xl"
+            data-icon="bug_report"
+            >bug_report</span
+          >
+          <span
+            class="font-inter text-[9px] tracking-widest uppercase font-semibold mt-1"
+            >DEBUG</span
+          >
+        </a>
+        <a
+          class="flex flex-col items-center justify-center text-slate-400 dark:text-slate-600 opacity-60 hover:opacity-100 tap-highlight-none active:scale-90 transition-opacity duration-200"
+          href="/loading"
+          target="_top"
+        >
+          <span
+            class="material-symbols-outlined text-2xl"
+            data-icon="rocket_launch"
+            >rocket_launch</span
+          >
+          <span
+            class="font-inter text-[9px] tracking-widest uppercase font-semibold mt-1"
+            >DEPLOY</span
+          >
+        </a>
+      </div>
+    </nav>
+  </body>
+</html>

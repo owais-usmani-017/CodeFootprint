@@ -1,0 +1,522 @@
+<!doctype html>
+
+<html class="light" lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta content="width=device-width, initial-scale=1.0" name="viewport" />
+    <title>CodeFootprint | Understand Your Real Code Contributions</title>
+    <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&amp;family=Manrope:wght@300;400;500;600;700&amp;display=swap"
+      rel="stylesheet"
+    />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap"
+      rel="stylesheet"
+    />
+    <script id="tailwind-config">
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            colors: {
+              "primary-fixed-dim": "#adc6ff",
+              "tertiary-container": "#b75b00",
+              "on-background": "#0f172a",
+              "surface-dim": "#f1f5f9",
+              "on-secondary-fixed-variant": "#304671",
+              "secondary-fixed": "#d8e2ff",
+              "surface-container-highest": "#f8fafc",
+              secondary: "#495e8a",
+              "secondary-fixed-dim": "#b1c6f9",
+              "surface-container-low": "#fcfdfe",
+              "inverse-primary": "#adc6ff",
+              "primary-container": "#2563eb",
+              "outline-variant": "#e2e8f0",
+              "tertiary-fixed": "#ffdcc6",
+              "secondary-container": "#f1f5f9",
+              "surface-bright": "#ffffff",
+              "on-tertiary-container": "#fffbff",
+              "surface-container-lowest": "#ffffff",
+              background: "#fbfcfd",
+              "tertiary-fixed-dim": "#ffb786",
+              "on-surface-variant": "#64748b",
+              "on-primary": "#ffffff",
+              outline: "#cbd5e1",
+              primary: "#2563eb",
+              "inverse-on-surface": "#f8fafc",
+              "surface-variant": "#f1f5f9",
+              "on-tertiary": "#ffffff",
+              "on-tertiary-fixed-variant": "#723600",
+              tertiary: "#924700",
+              "on-error-container": "#93000a",
+              "on-tertiary-fixed": "#311400",
+              "surface-tint": "#2563eb",
+              error: "#ef4444",
+              "on-primary-fixed-variant": "#1d4ed8",
+              "inverse-surface": "#1e293b",
+              "on-error": "#ffffff",
+              "primary-fixed": "#dbeafe",
+              "on-surface": "#0f172a",
+              "surface-container": "#f8fafc",
+              "on-secondary-container": "#334155",
+              "surface-container-high": "#f1f5f9",
+              "on-secondary-fixed": "#0f172a",
+              "on-secondary": "#ffffff",
+              "on-primary-container": "#ffffff",
+              surface: "#ffffff",
+              "error-container": "#fee2e2",
+              "on-primary-fixed": "#1e3a8a",
+            },
+            fontFamily: {
+              headline: ["Manrope", "Inter", "sans-serif"],
+              body: ["Inter", "sans-serif"],
+              label: ["Inter", "sans-serif"],
+              manrope: ["Manrope", "sans-serif"],
+            },
+            borderRadius: {
+              DEFAULT: "0.25rem",
+              lg: "0.5rem",
+              xl: "1rem",
+              full: "9999px",
+            },
+          },
+        },
+      };
+    </script>
+    <style>
+      .material-symbols-outlined {
+        font-variation-settings:
+          "FILL" 0,
+          "wght" 300,
+          "GRAD" 0,
+          "opsz" 24;
+      }
+      body {
+        font-family: "Inter", sans-serif;
+        background-color: #fbfcfd;
+        color: #0f172a;
+        letter-spacing: -0.01em;
+      }
+      .premium-blur {
+        backdrop-filter: blur(12px);
+        -webkit-backdrop-filter: blur(12px);
+      }
+    </style>
+  </head>
+  <body
+    class="bg-background text-on-background selection:bg-primary-container selection:text-on-primary-container"
+  >
+    <!-- TopAppBar: ARCHITECT Component Style -->
+    <header
+      class="fixed top-0 w-full z-50 bg-white/80 dark:bg-slate-950/80 backdrop-blur-xl border-none"
+    >
+      <div
+        class="flex justify-between items-center px-8 md:px-12 py-6 w-full max-w-7xl mx-auto"
+      >
+        <div class="flex items-center gap-3 group cursor-pointer">
+          <span
+            class="material-symbols-outlined text-blue-600 text-2xl"
+            data-icon="grid_view"
+            >grid_view</span
+          >
+          <span
+            class="text-lg font-semibold tracking-[0.2em] text-slate-900 uppercase"
+            >CodeFootprint</span
+          >
+        </div>
+        <nav class="hidden md:flex items-center gap-10">
+          <a
+            class="text-blue-600 font-medium font-manrope tracking-tight text-sm transition-all scale-95 active:opacity-70"
+            href="/"
+            target="_top"
+            >Analyze</a
+          >
+          <a
+            class="text-slate-500 hover:text-blue-500 transition-colors duration-300 font-manrope tracking-tight text-sm scale-95 active:opacity-70"
+            href="/dashboard"
+            target="_top"
+            >Dashboard</a
+          >
+          <a
+            class="text-slate-500 hover:text-blue-500 transition-colors duration-300 font-manrope tracking-tight text-sm scale-95 active:opacity-70"
+            href="/heatmap"
+            target="_top"
+            >Heatmap</a
+          >
+          <a
+            class="text-slate-500 hover:text-blue-500 transition-colors duration-300 font-manrope tracking-tight text-sm scale-95 active:opacity-70"
+            href="/loading"
+            target="_top"
+            >Settings</a
+          >
+        </nav>
+        <div class="flex items-center gap-4">
+          <span
+            class="material-symbols-outlined text-slate-500 cursor-pointer hover:text-slate-900 transition-colors"
+            data-icon="settings"
+            >settings</span
+          >
+          <div
+            class="w-8 h-8 rounded-full bg-slate-100 flex items-center justify-center overflow-hidden grayscale hover:grayscale-0 transition-all"
+          >
+            <img
+              alt="User"
+              class="w-full h-full object-cover"
+              src="https://lh3.googleusercontent.com/aida-public/AB6AXuAlPagg7b04dJHlmrB7dYG0Ga96NiA-8pssdRYrm7MuyFZCY5MOyIAQYFNDFfu13gPF1hUVuN2vjfgYPNVsNXMe0hyqZcSCf0s-z-eGqCCZiIRD_l2-BvAH7_-80T0HANDMLJ3PAv3DxHKyu9XbZtE6cKFdDIu_Q-9eEzJnc29GjfH5aBana5Pn9l99-Pf5_PGX0FbEcqCNcF8cej8xok17oZgJgoRQ8r1M63xJA_kk9ECHjtN0TYW5JI0zBg-Yx_AiI-MTWAiEWPI"
+            />
+          </div>
+        </div>
+      </div>
+    </header>
+    <main class="pt-32 pb-40 md:pb-32 px-6 max-w-7xl mx-auto min-h-screen">
+      <!-- Hero Section -->
+      <section
+        class="flex flex-col lg:flex-row items-center gap-24 py-16 lg:py-32"
+      >
+        <div class="w-full lg:w-1/2 space-y-12">
+          <div class="space-y-6">
+            <span
+              class="inline-flex items-center px-4 py-1 rounded-full bg-blue-50 text-primary font-manrope text-[10px] font-bold uppercase tracking-[0.2em]"
+            >
+              System Version 2.0
+            </span>
+            <h1
+              class="text-6xl lg:text-8xl font-light tracking-tighter text-on-background leading-[0.9] font-headline"
+            >
+              Real Code <br />
+              <span class="font-bold text-primary">Contributions.</span>
+            </h1>
+            <p
+              class="text-slate-400 text-lg lg:text-xl max-w-lg font-light leading-relaxed font-body"
+            >
+              CodeFootprint utilizes high-fidelity commit analysis to surface
+              the logical impact and structural value of every push.
+            </p>
+          </div>
+          <!-- Minimal Action Area -->
+          <div class="w-full max-w-xl">
+            <form class="flex flex-col md:flex-row gap-4">
+              <div
+                class="flex-[2] flex items-center px-0 py-3 border-b border-slate-200 focus-within:border-primary transition-all"
+              >
+                <span
+                  class="material-symbols-outlined text-slate-300 text-xl mr-3"
+                  data-icon="link"
+                  >link</span
+                >
+                <input
+                  class="bg-transparent border-none focus:ring-0 text-sm w-full placeholder:text-slate-300 font-light"
+                  placeholder="GitHub Repository URL"
+                  type="text"
+                />
+              </div>
+              <div
+                class="flex-1 flex items-center px-0 py-3 border-b border-slate-200 focus-within:border-primary transition-all"
+              >
+                <span
+                  class="material-symbols-outlined text-slate-300 text-xl mr-3"
+                  data-icon="person"
+                  >person</span
+                >
+                <input
+                  class="bg-transparent border-none focus:ring-0 text-sm w-full placeholder:text-slate-300 font-light"
+                  placeholder="Username"
+                  type="text"
+                />
+              </div>
+              <button
+                class="bg-primary text-white px-10 py-4 rounded-full font-manrope text-xs font-semibold uppercase tracking-widest hover:bg-blue-700 active:scale-95 transition-all self-start md:self-center"
+              >
+                Analyze
+              </button>
+            </form>
+          </div>
+          <div class="flex items-center gap-8 pt-4">
+            <div class="flex -space-x-3">
+              <img
+                class="w-7 h-7 rounded-full ring-2 ring-background grayscale"
+                data-alt="portrait"
+                src="https://lh3.googleusercontent.com/aida-public/AB6AXuALBbYMG3mN662CzjG5v4ilV29VEpPyGYV4S4QoMSQ988ldsCqx6A4-8CbJH0qKIcDtI94JJlnon_SOhVNkcgTm4DuzfJU3R0BIuH18hoBdU8jFuLE2iPT3BTTqeLjBp18wmAHEddhUN4fnKLx7puJoG-u4ohuu9-DeYel0CBdnML3_qnrcPRJG2m8Ot83sD6iXf7ZUbnVTc0jEMxYaHFVACz2BwepRJhhmwGovYfpBnBmBiWY7ySZiHg1z6G6GC1LPEqJJHy021jU"
+              />
+              <img
+                class="w-7 h-7 rounded-full ring-2 ring-background grayscale"
+                data-alt="portrait"
+                src="https://lh3.googleusercontent.com/aida-public/AB6AXuCRN9LxGRKBLGUWsYzU8J-FcKVkZiAAUmbrXY2UYCniazAXmu6yIZ8Tu6bRc8n5hcijXASHdKJO6MABGh1I7ZPkBfre2YWLBEn_Eypez9gUW4IAKYegygSGbnY6RSo-wJUoUjZ-OnZhMjOErN3iOhspPfPcLPhc-5pjyU65NOcxLHt1D0aX6UnaYC__DJKgDnT8FOsUohlZl6O9xmylQK0U8O8eqbCajT3-TlS0BGxFcN2Q4rZgNkMhWxqjyotYk2wVizyCu-7SRtc"
+              />
+              <img
+                class="w-7 h-7 rounded-full ring-2 ring-background grayscale"
+                data-alt="portrait"
+                src="https://lh3.googleusercontent.com/aida-public/AB6AXuClFLsrYz6OUJJFq9lNqmjEY8U28uSQARaohrer_JBEZt1rGcXhKHnXwOuXxAKYQmtbuQkR3AV7ZawA1HRm3y6YP-kqyAjdZKkoKXbZTlR8P9aBYpYYg_5Mby9XF4uFB9d1cBSbmBcyVeStMvRS9Tey-utYoi7z4_t6wNER12pouO-Y4BsPDmnxez-Prtamazd49ZP-ptroYcYKhy2qnIJ46HFnEpFFE0Rr9lktvinyMntlCJbEqZOiiTJv_OaCPlwOlqu2A6VeioU"
+              />
+            </div>
+            <p
+              class="text-[10px] text-slate-400 font-semibold uppercase tracking-widest"
+            >
+              Verified by 4,000+ engineers
+            </p>
+          </div>
+        </div>
+        <!-- Illustration -->
+        <div class="w-full lg:w-1/2 relative group">
+          <div
+            class="relative bg-white rounded-3xl overflow-hidden aspect-square flex items-center justify-center p-12"
+          >
+            <div class="w-full h-full relative">
+              <div class="absolute inset-0 flex flex-col gap-6">
+                <div
+                  class="h-2/5 w-full bg-slate-50/50 rounded-2xl p-8 flex flex-col justify-between border border-slate-100"
+                >
+                  <div class="flex justify-between items-start">
+                    <div class="h-1 w-32 bg-slate-200 rounded"></div>
+                    <span
+                      class="material-symbols-outlined text-blue-600 text-sm opacity-40"
+                      data-icon="insights"
+                      >insights</span
+                    >
+                  </div>
+                  <div class="flex gap-3 items-end">
+                    <div class="h-12 w-2 bg-blue-100 rounded-t-full"></div>
+                    <div class="h-20 w-2 bg-blue-600 rounded-t-full"></div>
+                    <div class="h-16 w-2 bg-blue-200 rounded-t-full"></div>
+                    <div class="h-24 w-2 bg-blue-600 rounded-t-full"></div>
+                    <div class="h-14 w-2 bg-blue-100 rounded-t-full"></div>
+                  </div>
+                </div>
+                <div class="flex-1 flex gap-6">
+                  <div
+                    class="flex-1 bg-slate-50/50 rounded-2xl p-8 border border-slate-100"
+                  >
+                    <div class="h-1 w-20 bg-slate-200 rounded mb-6"></div>
+                    <div class="space-y-3">
+                      <div class="h-px w-full bg-slate-100 rounded"></div>
+                      <div class="h-px w-3/4 bg-slate-100 rounded"></div>
+                      <div class="h-px w-full bg-slate-100 rounded"></div>
+                    </div>
+                  </div>
+                  <div
+                    class="flex-1 bg-white border border-slate-100 rounded-2xl p-8 flex flex-col justify-center items-center text-center"
+                  >
+                    <span
+                      class="text-5xl font-extralight tracking-tighter text-blue-600"
+                      >84.2</span
+                    >
+                    <span
+                      class="text-[9px] uppercase font-bold tracking-[0.2em] text-slate-400 mt-2"
+                      >Impact Index</span
+                    >
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+      <!-- Features Bento Section -->
+      <section class="py-12 grid grid-cols-1 md:grid-cols-3 gap-8">
+        <div
+          class="md:col-span-2 bg-white rounded-3xl p-10 border border-slate-100 flex flex-col justify-between group transition-all hover:border-slate-200"
+        >
+          <div class="space-y-6">
+            <span
+              class="material-symbols-outlined text-blue-600 text-4xl font-light"
+              data-icon="schema"
+              >schema</span
+            >
+            <h3 class="text-3xl font-light tracking-tight font-headline">
+              Logical Path Analysis
+            </h3>
+            <p class="text-slate-400 font-light leading-relaxed max-w-md">
+              Our intelligence traces the functional trajectory of your changes
+              across the entire codebase architecture.
+            </p>
+          </div>
+          <div class="mt-12 h-32 w-full flex items-center justify-center gap-4">
+            <div
+              class="w-12 h-12 rounded-full bg-slate-50 flex items-center justify-center border border-slate-100"
+            >
+              <span
+                class="material-symbols-outlined text-slate-300 text-lg"
+                data-icon="merge"
+                >merge</span
+              >
+            </div>
+            <div class="h-px bg-slate-100 flex-1"></div>
+            <div
+              class="w-12 h-12 rounded-full bg-white flex items-center justify-center border border-blue-100 shadow-sm"
+            >
+              <span
+                class="material-symbols-outlined text-blue-600 text-lg"
+                data-icon="call_split"
+                >call_split</span
+              >
+            </div>
+            <div class="h-px bg-slate-100 flex-1"></div>
+            <div
+              class="w-12 h-12 rounded-full bg-slate-50 flex items-center justify-center border border-slate-100"
+            >
+              <span
+                class="material-symbols-outlined text-slate-300 text-lg"
+                data-icon="account_tree"
+                >account_tree</span
+              >
+            </div>
+          </div>
+        </div>
+        <div
+          class="bg-blue-600 text-white rounded-3xl p-10 flex flex-col justify-between overflow-hidden relative"
+        >
+          <div class="absolute -right-12 -bottom-12 opacity-10">
+            <span
+              class="material-symbols-outlined text-[200px]"
+              data-icon="history_edu"
+              >history_edu</span
+            >
+          </div>
+          <div class="space-y-6 relative z-10">
+            <h3 class="text-3xl font-light tracking-tight font-headline">
+              Commit Legacy
+            </h3>
+            <p class="text-blue-100/70 font-light leading-relaxed text-sm">
+              Quantifying durability. High-quality code is measured by its
+              architectural resilience over time.
+            </p>
+          </div>
+          <div class="relative z-10">
+            <span class="text-6xl font-extralight tracking-tighter">9.4mo</span>
+            <p
+              class="text-[9px] uppercase font-bold tracking-[0.2em] mt-2 text-blue-200"
+            >
+              Retention Average
+            </p>
+          </div>
+        </div>
+        <!-- Small feature cards -->
+        <div
+          class="bg-white rounded-3xl p-10 border border-slate-100 transition-all hover:border-slate-200"
+        >
+          <div
+            class="w-12 h-12 rounded-full bg-slate-50 flex items-center justify-center mb-8 border border-slate-100"
+          >
+            <span
+              class="material-symbols-outlined text-slate-400 text-xl"
+              data-icon="bolt"
+              >bolt</span
+            >
+          </div>
+          <h4 class="text-lg font-medium tracking-tight mb-3">
+            Real-time Heatmaps
+          </h4>
+          <p class="text-sm text-slate-400 font-light leading-relaxed">
+            Visualize critical influence zones where your contributions drive
+            the most change.
+          </p>
+        </div>
+        <div
+          class="bg-white rounded-3xl p-10 border border-slate-100 transition-all hover:border-slate-200"
+        >
+          <div
+            class="w-12 h-12 rounded-full bg-slate-50 flex items-center justify-center mb-8 border border-slate-100"
+          >
+            <span
+              class="material-symbols-outlined text-slate-400 text-xl"
+              data-icon="terminal"
+              >terminal</span
+            >
+          </div>
+          <h4 class="text-lg font-medium tracking-tight mb-3">
+            CLI Integration
+          </h4>
+          <p class="text-sm text-slate-400 font-light leading-relaxed">
+            Analyze local uncommitted changes before the terminal handshake.
+          </p>
+        </div>
+        <div
+          class="bg-white rounded-3xl p-10 border border-slate-100 transition-all hover:border-slate-200"
+        >
+          <div
+            class="w-12 h-12 rounded-full bg-slate-50 flex items-center justify-center mb-8 border border-slate-100"
+          >
+            <span
+              class="material-symbols-outlined text-slate-400 text-xl"
+              data-icon="security"
+              >security</span
+            >
+          </div>
+          <h4 class="text-lg font-medium tracking-tight mb-3">
+            Identity Guard
+          </h4>
+          <p class="text-sm text-slate-400 font-light leading-relaxed">
+            Metadata-only ingestion. Your source code remains strictly within
+            your perimeter.
+          </p>
+        </div>
+      </section>
+    </main>
+    <!-- BottomNavBar: label_icon Component Style -->
+    <nav
+      class="md:hidden fixed bottom-0 left-0 w-full bg-slate-50/90 backdrop-blur-lg border-t border-slate-200/10 z-50 pb-8"
+    >
+      <div
+        class="flex justify-around items-center w-full max-w-lg mx-auto h-20 px-4"
+      >
+        <a
+          class="flex flex-col items-center justify-center text-blue-600 opacity-100 active:scale-90 transition-all tap-highlight-none"
+          href="/"
+          target="_top"
+        >
+          <span class="material-symbols-outlined text-2xl" data-icon="code"
+            >code</span
+          >
+          <span
+            class="font-inter text-[9px] tracking-widest uppercase font-semibold mt-1"
+            >CODE</span
+          >
+        </a>
+        <a
+          class="flex flex-col items-center justify-center text-slate-400 opacity-60 hover:opacity-100 transition-opacity duration-200 active:scale-90 transition-all tap-highlight-none"
+          href="/dashboard"
+          target="_top"
+        >
+          <span class="material-symbols-outlined text-2xl" data-icon="terminal"
+            >terminal</span
+          >
+          <span
+            class="font-inter text-[9px] tracking-widest uppercase font-semibold mt-1"
+            >BUILD</span
+          >
+        </a>
+        <a
+          class="flex flex-col items-center justify-center text-slate-400 opacity-60 hover:opacity-100 transition-opacity duration-200 active:scale-90 transition-all tap-highlight-none"
+          href="/heatmap"
+          target="_top"
+        >
+          <span
+            class="material-symbols-outlined text-2xl"
+            data-icon="bug_report"
+            >bug_report</span
+          >
+          <span
+            class="font-inter text-[9px] tracking-widest uppercase font-semibold mt-1"
+            >DEBUG</span
+          >
+        </a>
+        <a
+          class="flex flex-col items-center justify-center text-slate-400 opacity-60 hover:opacity-100 transition-opacity duration-200 active:scale-90 transition-all tap-highlight-none"
+          href="/loading"
+          target="_top"
+        >
+          <span
+            class="material-symbols-outlined text-2xl"
+            data-icon="rocket_launch"
+            >rocket_launch</span
+          >
+          <span
+            class="font-inter text-[9px] tracking-widest uppercase font-semibold mt-1"
+            >DEPLOY</span
+          >
+        </a>
+      </div>
+    </nav>
+  </body>
+</html>
