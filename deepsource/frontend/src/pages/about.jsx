@@ -2,9 +2,9 @@ import React from "react";
 
 function About() {
   return (
-    <div className="min-h-screen bg-gradient-to-br from-blue-50 to-cyan-50">
+    <div className="min-h-screen bg-linear-to-br from-blue-50 to-cyan-50">
       {/* Header */}
-      <div className="bg-gradient-to-r from-blue-500 to-cyan-500 text-white py-16">
+      <div className="bg-linear-to-r from-blue-500 to-cyan-500 text-white py-16">
         <div className="max-w-4xl mx-auto px-4">
           <h1 className="text-4xl font-bold mb-3">About CodeFootprint</h1>
           <p className="text-lg opacity-90">

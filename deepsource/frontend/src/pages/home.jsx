@@ -2,9 +2,9 @@ import React from "react";
 
 function Home() {
   return (
-    <div className="min-h-screen bg-gradient-to-br from-blue-50 to-cyan-50">
+    <div className="min-h-screen bg-linear-to-br from-blue-50 to-cyan-50">
       {/* Hero Section */}
-      <div className="bg-gradient-to-r from-blue-500 to-cyan-500 text-white py-20">
+      <div className="bg-linear-to-r from-blue-500 to-cyan-500 text-white py-20">
         <div className="max-w-4xl mx-auto px-4">
           <h1 className="text-5xl font-bold mb-4">CodeFootprint</h1>
           <p className="text-xl opacity-90 mb-6">
@@ -89,7 +89,7 @@ function Home() {
         {/* CTA */}
         <div className="text-center">
           <p className="text-slate-700 mb-6">Ready to analyze your code?</p>
-          <button className="bg-gradient-to-r from-blue-500 to-cyan-500 text-white font-semibold py-3 px-12 rounded-lg hover:shadow-md transition">
+          <button className="bg-linear-to-r from-blue-500 to-cyan-500 text-white font-semibold py-3 px-12 rounded-lg hover:shadow-md transition">
             Start Analyzing
           </button>
         </div>
